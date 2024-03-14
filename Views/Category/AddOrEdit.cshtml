@@ -1,0 +1,113 @@
+﻿@model Expense_Tracker.Models.Category
+
+@{
+    ViewData["PageTitle"] = Model.CategoryId == 0 ? "Create a new category" : "Edit category";
+}
+
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="widget p-5" style="background-color:#212b36">
+            <form asp-action="AddOrEdit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
+                <div class="mb-3">
+                    <div class='e-btn-group custom-rbt-group'>
+                        <input type="radio" id="radioleft" name="Type" value="Expense" checked="@(Model.Type=="Expense")" />
+                        <label class="e-btn" for="radioleft">Expense</label>
+                        <input type="radio" id="radiomiddle" name="Type" value="Income" checked="@(Model.Type=="Income")" />
+                        <label class="e-btn" for="radiomiddle">Income</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <ejs-textbox id="title" placeholder="Title" ejs-for="Title" floatLabelType="Always"></ejs-textbox>
+                    <span asp-validation-for="Title" class="text-danger fs-6"></span>
+                </div>
+                <div class="mb-3">
+                    <ejs-textbox id="icon" placeholder="Icon" ejs-for="Icon" floatLabelType="Always"></ejs-textbox>
+                </div>
+                <div class="mb-3">
+                  @*  <div class="control-section">
+                        <div id="default-control">
+                            <h4>Choose a color</h4>
+                            <ejs-colorpicker id='color-picker' ejs-for="Color"></ejs-colorpicker>
+                        </div>
+                    </div>*@
+                    <ejs-textbox id="color" placeholder="Color" ejs-for="Color" floatLabelType="Always"></ejs-textbox>
+
+
+                  
+                </div>
+                <ejs-button id="submit" type="submit" content="Submit" cssClass="e-success"></ejs-button>
+            </form>
+        </div>
+
+
+    </div>
+    <div class="col-md-5">
+        <div class="widget h-100 d-flex justify-content-center align-items-center">
+            <i class="fa-solid fa-shapes fa-2xl"></i>
+        </div>
+    </div>
+</div>
+
+
+@*@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}*@
+
+
+@*@using Syncfusion.EJ2
+@{
+    var data = new List<string>
+{
+    "Juego1",
+    "Juego2",
+    "Juego3"
+};
+}
+
+    <div class="col-lg-8 control-section">
+        <div class="control-wrapper">
+            <div id="default" style='padding-top:75px;'>
+                <ejs-dropdownlist id="games" dataSource="@data" placeholder="Select a game" index="2" popupHeight="220px" change="valueChange">
+                    <e-dropdownlist-fields text="Game" value="Id"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 property-section">
+        <table id="property" title="Properties" style="width: 100%; margin:10px">
+            <tr>
+                <td class="left-side">Value</td>
+                <td>:<span id='value' class="right-side"></span></td>
+            </tr>
+            <tr>
+                <td class="left-side">Text</td>
+                <td>:<span id='text' class="right-side"></span></td>
+            </tr>
+        </table>
+    </div>
+
+
+    <script type="text/javascript">
+        function valueChange() {
+            var listObj = document.getElementById('games').ej2_instances[0];
+            var value = document.getElementById('value');
+            var text = document.getElementById('text');
+            // update the text and value property values in property panel based on selected item in DropDownList
+            value.innerHTML = listObj.value;
+            text.innerHTML = listObj.text;
+        }
+    </script>
+
+@section Scripts{
+    <script type="text/javascript">
+        valueChange();
+
+    </script>
+}*@
+
+
